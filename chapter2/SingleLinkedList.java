@@ -36,24 +36,21 @@ public class SingleLinkedList {
     int getData(){
         return this.data;
     }
-    int delete(int data){
+    SingleLinkedList delete(int data){
         SingleLinkedList tmp = this;
-        int ctr =0;
-        while(tmp!=null &&
-                tmp.getData()!=data){
-            tmp = tmp.getNext();
-            ctr++;
+        int ctr = 0;
+        if(tmp.getData()==data){
+            return tmp.getNext();
         }
-        boolean found = false;
-        if(tmp!= null && tmp.getData()==data){
-            tmp.setNext(tmp.getNext());
-            found = true;
+        while(tmp.getNext()!= null &&
+                tmp.getNext().getData()!=data){
+            tmp = tmp.getNext();            
         }
-        if(found){
-            return ctr;
-        }else{
-            return -1;
+        if(tmp.getNext() !=null && tmp.getNext().getData()==data){
+            tmp.setNext(tmp.getNext().getNext());
+            return tmp;
         }
+        return null;
     }
     @Override
     public String toString(){
